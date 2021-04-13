@@ -5,11 +5,38 @@ import myinterface.Node;
 
 public class MyBinarySearchTree<E extends Comparable<E>> implements BinarySearchTreeADT<E> {
     //complete this class
+    private Node<E> root;
+    public Node<E> getRoot() {
+        return root;
+    }
 
     @Override
     public void insert(E data) {
-
+        Node<E> node = new implementation.Node<>(data);
+        if (root == null) {
+            root = node;
+        }
+        else{
+            implementation.Node temp = (implementation.Node) root;
+            Node<E> parent = null;
+            while(temp != null){
+                parent = temp;
+                if(data.compareTo((E) temp.getData()) <= 0){
+                    temp = temp.getLeft();
+                }
+                else{
+                    temp = temp.getRight();
+                }
+            }
+            if(data.compareTo(((implementation.Node<E>) parent).getData()) <= 0){
+                ((implementation.Node<E>) parent).setLeft((implementation.Node<E>) node);
+            }
+            else{
+                ((implementation.Node<E>) parent).setRight((implementation.Node<E>) node);
+            }
+        }
     }
+
 
     @Override
     public boolean search(E searchElement) {
