@@ -6,6 +6,7 @@ import myinterface.Node;
 public class MyBinarySearchTree<E extends Comparable<E>> implements BinarySearchTreeADT<E> {
     //complete this class
     private Node<E> root;
+
     public Node<E> getRoot() {
         return root;
     }
@@ -15,23 +16,20 @@ public class MyBinarySearchTree<E extends Comparable<E>> implements BinarySearch
         Node<E> node = new implementation.Node<>(data);
         if (root == null) {
             root = node;
-        }
-        else{
+        } else {
             implementation.Node temp = (implementation.Node) root;
             Node<E> parent = null;
-            while(temp != null){
+            while (temp != null) {
                 parent = temp;
-                if(data.compareTo((E) temp.getData()) <= 0){
+                if (data.compareTo((E) temp.getData()) <= 0) {
                     temp = temp.getLeft();
-                }
-                else{
+                } else {
                     temp = temp.getRight();
                 }
             }
-            if(data.compareTo(((implementation.Node<E>) parent).getData()) <= 0){
+            if (data.compareTo(((implementation.Node<E>) parent).getData()) <= 0) {
                 ((implementation.Node<E>) parent).setLeft((implementation.Node<E>) node);
-            }
-            else{
+            } else {
                 ((implementation.Node<E>) parent).setRight((implementation.Node<E>) node);
             }
         }
@@ -41,14 +39,12 @@ public class MyBinarySearchTree<E extends Comparable<E>> implements BinarySearch
     @Override
     public boolean search(E searchElement) {
         implementation.Node temp = (implementation.Node) root;
-        while (temp!=null){
-            if (searchElement.compareTo((E) temp.getData())<0){
-                temp=temp.getLeft();
-            }
-            else if (searchElement.compareTo((E) temp.getData())>0){
-                temp=temp.getRight();
-            }
-            else {
+        while (temp != null) {
+            if (searchElement.compareTo((E) temp.getData()) < 0) {
+                temp = temp.getLeft();
+            } else if (searchElement.compareTo((E) temp.getData()) > 0) {
+                temp = temp.getRight();
+            } else {
                 return true;
             }
         }
@@ -56,22 +52,28 @@ public class MyBinarySearchTree<E extends Comparable<E>> implements BinarySearch
     }
 
     @Override
-    public void inOrder(Node<E> node) {
+    public void inOrder(implementation.Node<E> node) {
+        inOrder(node.getLeft());
+        if (node != null) {
+            System.out.print(node.getData() + ", ");
+        }
+        inOrder(node.getRight());
 
     }
 
     @Override
-    public void preOrder(Node<E> node) {
+    public void preOrder(implementation.Node<E> node) {
 
     }
 
     @Override
-    public void postOrder(Node<E> node) {
+    public void postOrder(implementation.Node<E> node) {
+
 
     }
 
     @Override
-    public void reverseInOrder(Node<E> node) {
+    public void reverseInOrder(implementation.Node<E> node) {
 
     }
 
@@ -84,4 +86,5 @@ public class MyBinarySearchTree<E extends Comparable<E>> implements BinarySearch
     public int height(Node<E> node) {
         return 0;
     }
+
 }
